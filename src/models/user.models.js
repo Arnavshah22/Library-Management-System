@@ -1,5 +1,6 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -54,6 +55,9 @@ const UserSchema = new mongoose.Schema({
                 type: Boolean,
                 default: false,
             },
+            refreshToken:{
+                type:String,
+            }
         },
     ],
 }, { timestamps: true });
@@ -76,7 +80,7 @@ UserSchema.methods.generateAccessToken=function(){
       _id:this._id,
       email:this.email,
       username:this.username,
-      fullName:this.fullName,
+      role:this.role
   },
   process.env.ACCESS_TOKEN_SECRET,
   {
