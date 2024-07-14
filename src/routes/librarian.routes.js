@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { librarian, verifyJWT } from "../middleware/auth.middleware";
-import { addBook, generateReport, getOverdueBooks, issueBook, returnBook, updateBookDetails } from "../controllers/librarian.controller";
-import { upload } from "../middleware/multer.middleware";
+import { librarian, verifyJWT } from "../middleware/auth.middleware.js";
+import { addBook, generateReport, getOverdueBooks, issueBook, returnBook, updateBookDetails } from "../controllers/librarian.controller.js";
+import { upload } from "../middleware/multer.middleware.js";
 
 
 const router=Router();

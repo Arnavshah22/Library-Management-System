@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { admin, librarian, verifyJWT } from "../middleware/auth.middleware";
-import { createBook, deleteBook, getAllBooks, getBookById, getBooksByGenre, searchBooks, updateBook } from "../controllers/Books.controller";
+import { admin,  verifyJWT } from "../middleware/auth.middleware.js";
+import { createBook, deleteBook, getAllBooks, getBookById, getBooksByGenre, searchBooks, updateBook } from "../controllers/Books.controller.js";
 
 const router=Router();
 
