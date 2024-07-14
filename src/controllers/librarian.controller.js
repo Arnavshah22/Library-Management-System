@@ -4,18 +4,38 @@ import { Transaction } from "../models/Transaction.model.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 const addBook = asyncHandler(async (req, res) => {
-    const { title, author, ISBN, quantity, description, genre } = req.body;
+    const { title, author, ISBN, quantity, description, genre ,coverImage} = req.body;
 
-    if (!title || !author || !ISBN || !quantity) {
-        throw new ApiError(400, "Title, author, ISBN, and quantity are required");
+    if (!title || !author || !ISBN || !quantity || coverImage) {
+        throw new ApiError(400, "Title, author, ISBN,coverImage and quantity are required");
     }
 
     const existingBook = await Book.findOne({ ISBN });
     if (existingBook) {
         throw new ApiError(409, "Book with this ISBN already exists");
     }
+
+    const avatarLocalPath=req.files?.avatar[0]?.path;
+      let coverImageLocalPath;
+
+       if(req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length > 0){
+        coverImageLocalPath=req.files.coverImage[0].path
+       }
+
+       if(!avatarLocalPath){
+        throw new ApiError(400,"Avatar file is required")
+       }
+
+       const avatar=await uploadOnCloudinary(avatarLocalPath)
+       const coverImg=await uploadOnCloudinary(coverImageLocalPath)
+
+       if(!avatar){
+        throw new ApiError(400,"Avatar is Required")
+    }
+
 
     const newBook = await Book.create({
         title,
@@ -24,7 +44,8 @@ const addBook = asyncHandler(async (req, res) => {
         quantity,
         available: quantity,
         description,
-        genre
+        genre,
+        coverImage:coverImg.url
     });
 
     return res.status(201).json(

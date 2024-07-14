@@ -1,11 +1,12 @@
 import { Router } from "express";
 import { librarian, verifyJWT } from "../middleware/auth.middleware";
 import { addBook, generateReport, getOverdueBooks, issueBook, returnBook, updateBookDetails } from "../controllers/librarian.controller";
+import { upload } from "../middleware/multer.middleware";
 
 
 const router=Router();
 
-router.route("/add-books").post(verifyJWT,librarian,addBook);
+router.route("/add-books").post(verifyJWT,upload.single("coverImage"),librarian,addBook);
 router.route("/update-books").put(verifyJWT,librarian,updateBookDetails);
 router.route("/issue-books").post(verifyJWT,librarian,issueBook);
 router.route("/return-books").patch(verifyJWT,librarian,returnBook);

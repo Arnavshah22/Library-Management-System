@@ -59,6 +59,7 @@ const bookSchema = new mongoose.Schema({
     },
     coverImage: {
         type: String,
+        required:true,
         trim: true
     }
 }, { timestamps: true });
