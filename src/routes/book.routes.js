@@ -4,13 +4,13 @@ import { createBook, deleteBook, getAllBooks, getBookById, getBooksByGenre, sear
 
 const router=Router();
 
-router.route("/get-books").get(verifyJWT,admin,librarian,getAllBooks);
-router.route("/getbooks/:id").get(verifyJWT,admin,librarian,getBookById);
-router.route("/add-books").post(verifyJWT,admin,librarian,createBook);
-router.route("/update-books").put(verifyJWT,admin,librarian,updateBook);
-router.route("/delete-books").delete(verifyJWT,admin,librarian,deleteBook);
-router.route("/search-books").get(verifyJWT,admin,librarian,searchBooks);
-router.route("/genere").get(verifyJWT,admin,librarian,getBooksByGenre);
+router.route("/get-books").get(verifyJWT,admin,getAllBooks);
+router.route("/getbooks/:id").get(verifyJWT,admin,getBookById);
+router.route("/add-books").post(verifyJWT,admin,createBook);
+router.route("/update-books").put(verifyJWT,admin,updateBook);
+router.route("/delete-books").delete(verifyJWT,admin,deleteBook);
+router.route("/search-books").get(verifyJWT,admin,searchBooks);
+router.route("/genere").get(verifyJWT,admin,getBooksByGenre);
 
 
 
