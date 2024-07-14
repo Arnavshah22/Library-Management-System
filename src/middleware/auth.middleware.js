@@ -1,6 +1,6 @@
 import { User } from "../models/user.models.js";
 import { ApiError } from "../utils/ApiError.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
+import { asyncHandler } from "../utils/aysncHandler.js";
 import jwt from "jsonwebtoken"
 
 export const verifyJWT=asyncHandler(async(req,res,next)=>{
@@ -27,6 +27,23 @@ export const verifyJWT=asyncHandler(async(req,res,next)=>{
    }
 
 })
+
+export const admin = (req, res, next) => {
+    if (req.user && req.user.role === 'admin') {
+        next();
+    } else {
+        res.status(401).json({ message: 'Not authorized as an admin' });
+    }
+};
+
+export const librarian = (req, res, next) => {
+    if (req.user && (req.user.role === 'admin' || req.user.role === 'librarian')) {
+        next();
+    } else {
+        res.status(401).json({ message: 'Not authorized as a librarian' });
+    }
+};
+
 
 
 
