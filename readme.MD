@@ -91,32 +91,34 @@ The Library Management System is a comprehensive software solution designed to e
 ## API Endpoints
 
 1. User Management
-   - POST /api/users/register
-   - POST /api/users/login
-   - GET /api/users/:id
+   - POST /api/v1/users/register
+   - POST /api/v1/users/login
+    -POST /api/v1/users/logout
 
 2. Book Management
-   - GET /api/books
-   - POST /api/books
-   - PUT /api/books/:id
-   - DELETE /api/books/:id
+   - GET /api/v1/books/get-books
+   - GET /api/v1/books/getbooks/:id
+   - POST /api/v1/books/add-books
+   - PUT /api/v1/books/update-books
+   - DELETE /api/v1/books/delete-books
+   - GET /api/v1/books/search-books
+   - GET /api/v1/books/genere
 
-3. Borrowing System
-   - POST /api/transactions/checkout
-   - POST /api/transactions/return
-   - GET /api/transactions/history/:userId
+3. Librarian
+   - POST /api/v1/library/add-books
+   - POST /api/v1/library/update-books
+   - POST /api/v1/library/issue-books
+   - PATCH /api/v1/library/return-books
+   - GET /api/v1/library/get-over-due-books
+   - POST /api/v1/library/report
+   - 
 
-4. Search and Recommendations
-   - GET /api/books/search
-   - GET /api/books/recommendations/:userId
+4. Admin
+   - GET /api/v1/admin/get-users
+   - DELETE /api/v1/admin/delete/:id
+    - POST POST /api/v1/admin/statistic
+ -
 
-5. Notifications
-   - POST /api/notifications/send
-
-6. Reporting
-   - GET /api/reports/usage
-   - GET /api/reports/overdue
-   - GET /api/reports/user-activity
 
 ## Getting Started
 
